@@ -9,40 +9,28 @@
 
 ---
 
-## Текущая секция: Реализация OrchestratorModule
+## Текущая секция: Ожидание подтверждения
 
-### Цель
-Создать OrchestratorModule для роутинга сообщений между агентами.
+OrchestratorModule реализован. Ожидается подтверждение пользователя.
 
-### Зачем
-- Intent Classifier (Haiku) быстро определяет куда направить сообщение
-- OrchestratorService управляет shared state и переключением агентов
-- LLMClientFactory создаёт клиенты OpenRouter с правильными настройками
-
-### Задачи
-
-**Intent Classifier:**
-- [x] intent-classifier.service.ts - classify messages (keep_current/uncertain/switch)
-
-**LLM Client:**
-- [x] llm-client.factory.ts - создание OpenRouter клиентов с кэшированием
-- [x] openrouter.client.ts - wrapper для OpenRouter API
-
-**Orchestrator:**
-- [x] orchestrator.service.ts - роутинг, agent switching, conversation state
-- [x] agent-registry.service.ts - реестр core агентов (master, mechanic)
-
-**Tools:**
-- [ ] switch-to-agent.tool.ts - TODO (будет в LangGraph интеграции)
-- [ ] return-to-master.tool.ts - встроено в OrchestratorService
-
-**Module:**
-- [x] orchestrator.module.ts - forRoot/forRootAsync
-- [x] index.ts - экспорт всех компонентов
+### Следующие секции (по плану):
+1. Message Aggregator (Smart Batching)
+2. bootstrap() function
+3. Интеграция модулей в TelegramController
 
 ---
 
 ## История выполненных секций
+
+### ✅ OrchestratorModule (завершено)
+
+**Создано:**
+- openrouter.client.ts - wrapper для OpenRouter API
+- llm-client.factory.ts - создание клиентов с кэшированием
+- intent-classifier.service.ts - classify (keep_current/uncertain/switch)
+- agent-registry.service.ts - реестр агентов (master, mechanic)
+- orchestrator.service.ts - роутинг и agent switching
+- orchestrator.module.ts - forRoot/forRootAsync
 
 ### ✅ TelegramModule (Grammy) (завершено)
 
