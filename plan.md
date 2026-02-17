@@ -9,41 +9,34 @@
 
 ---
 
-## Текущая секция: Реализация DatabaseModule (Drizzle + Neon)
+## Текущая секция: Ожидание подтверждения
 
-### Цель
-Создать полноценный DatabaseModule с Drizzle ORM для работы с PostgreSQL (Neon в продакшене, локальный в dev).
+DatabaseModule реализован. Ожидается подтверждение пользователя для перехода к следующей секции.
 
-### Зачем
-- Основа для хранения состояния агентов, сообщений, конфигураций
-- Drizzle - type-safe ORM с отличной поддержкой TypeScript
-- Neon - serverless PostgreSQL с автоматическим масштабированием
-
-### Задачи
-
-**Схемы (в persais-core/src/core/database/schema/):**
-- [x] conversations.ts - таблица conversations с messages как JSONB
-- [x] agent-states.ts - состояние агентов (LangGraph checkpoints)
-- [x] llm-configs.ts - конфигурации LLM для агентов
-- [x] audit-log.ts - аудит действий
-- [x] agents-registry.ts - реестр агентов
-- [x] tools-registry.ts - реестр инструментов
-- [x] index.ts - экспорт всех схем
-
-**Сервисы:**
-- [x] database.service.ts - основной сервис с Drizzle client
-- [x] repositories/conversation.repository.ts - работа с conversations
-- [x] repositories/audit.repository.ts - логирование действий
-- [x] repositories/index.ts - экспорт репозиториев
-
-**Модуль:**
-- [x] database.module.ts - NestJS модуль с DI (forRoot/forRootAsync)
-- [x] drizzle.config.ts - конфигурация для миграций
-- [x] Экспорт из index.ts
+### Следующие секции (по плану):
+1. Реализация TelegramModule (Grammy)
+2. Реализация OrchestratorModule (Intent Classifier + Routing)
+3. Реализация Message Aggregator (Smart Batching)
 
 ---
 
 ## История выполненных секций
+
+### ✅ DatabaseModule (Drizzle + Neon) (завершено)
+
+**Схемы созданы:**
+- conversations.ts - с messages как JSONB
+- agent-states.ts - LangGraph checkpoints
+- llm-configs.ts, audit-log.ts
+- agents-registry.ts, tools-registry.ts
+
+**Сервисы:**
+- DatabaseService - connection pool
+- ConversationRepository, AuditRepository
+
+**Модуль:**
+- DatabaseModule.forRoot() / forRootAsync()
+- drizzle.config.ts для миграций
 
 ### ✅ NestJS skeleton + docker-compose (завершено)
 
