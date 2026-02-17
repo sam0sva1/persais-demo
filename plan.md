@@ -9,14 +9,36 @@
 
 ---
 
-## Текущая секция: Ожидание подтверждения
+## Текущая секция: Реализация OrchestratorModule
 
-TelegramModule реализован. Ожидается подтверждение пользователя для перехода к следующей секции.
+### Цель
+Создать OrchestratorModule для роутинга сообщений между агентами.
 
-### Следующие секции (по плану):
-1. Реализация OrchestratorModule (Intent Classifier + Routing)
-2. Реализация Message Aggregator (Smart Batching)
-3. Реализация bootstrap() function
+### Зачем
+- Intent Classifier (Haiku) быстро определяет куда направить сообщение
+- OrchestratorService управляет shared state и переключением агентов
+- LLMClientFactory создаёт клиенты OpenRouter с правильными настройками
+
+### Задачи
+
+**Intent Classifier:**
+- [x] intent-classifier.service.ts - classify messages (keep_current/uncertain/switch)
+
+**LLM Client:**
+- [x] llm-client.factory.ts - создание OpenRouter клиентов с кэшированием
+- [x] openrouter.client.ts - wrapper для OpenRouter API
+
+**Orchestrator:**
+- [x] orchestrator.service.ts - роутинг, agent switching, conversation state
+- [x] agent-registry.service.ts - реестр core агентов (master, mechanic)
+
+**Tools:**
+- [ ] switch-to-agent.tool.ts - TODO (будет в LangGraph интеграции)
+- [ ] return-to-master.tool.ts - встроено в OrchestratorService
+
+**Module:**
+- [x] orchestrator.module.ts - forRoot/forRootAsync
+- [x] index.ts - экспорт всех компонентов
 
 ---
 
