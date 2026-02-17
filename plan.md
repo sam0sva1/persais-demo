@@ -9,14 +9,37 @@
 
 ---
 
-## Текущая секция: Ожидание подтверждения
+## Текущая секция: Настройка npm link + docker-compose + NestJS skeleton
 
-Структура persais-core/ создана. Ожидается подтверждение пользователя для перехода к следующей секции.
+### Цель
+Связать два репозитория через npm link, создать docker-compose для локальной разработки и настроить базовый NestJS skeleton.
 
-### Следующие секции (по плану):
-1. Настройка npm link между репозиториями
-2. Создание docker-compose.yml для dev
-3. Создание базового NestJS skeleton
+### Зачем
+- npm link позволяет разрабатывать persais-core локально без публикации в npm
+- docker-compose поднимает PostgreSQL для локальной разработки
+- NestJS skeleton - основа для запуска приложения
+
+### Задачи
+
+**npm link:**
+- [ ] Выполнить `npm link` в persais-core/ ⚠️ требуется `sudo chown -R $(whoami) ~/.npm`
+- [x] Создать package.json в persais/ с зависимостью от persais-core (file:../persais-core)
+- [ ] Выполнить `npm install` после исправления прав npm
+- [ ] Проверить что import работает
+
+**docker-compose:**
+- [x] Создать docker-compose.yml в persais/ с PostgreSQL
+- [x] Добавить volume для persistence данных
+- [x] Добавить health check
+
+**NestJS skeleton в persais/:**
+- [x] Создать src/main.ts - точка входа
+- [x] Создать src/app.module.ts - корневой модуль
+- [x] Создать базовый tsconfig.json
+- [x] Создать .env.example
+- [x] Создать .gitignore
+- [x] Создать директории src/agents/, src/tools/, src/schemas/
+- [ ] Проверить что приложение запускается (после npm install)
 
 ---
 
