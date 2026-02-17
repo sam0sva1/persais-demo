@@ -9,35 +9,28 @@
 
 ---
 
-## Текущая секция: Реализация TelegramModule (Grammy)
+## Текущая секция: Ожидание подтверждения
 
-### Цель
-Создать TelegramModule для обработки webhook запросов от Telegram с Grammy.
+TelegramModule реализован. Ожидается подтверждение пользователя для перехода к следующей секции.
 
-### Зачем
-- Grammy - современная библиотека для Telegram ботов с хорошей типизацией
-- Webhook более эффективен чем polling для production
-- AuthGuard обеспечивает whitelist доступ
-
-### Задачи
-
-**Core:**
-- [x] telegram.module.ts - NestJS модуль с Bot factory (forRoot/forRootAsync)
-- [x] telegram.service.ts - отправка сообщений, форматирование, progress updates
-- [x] telegram.controller.ts - webhook endpoint с роутингом
-
-**Guards & Handlers:**
-- [x] telegram-auth.guard.ts - whitelist + admin проверка
-- [x] emergency-command.handler.ts - /status, /reset (abort/rollback/deploy - TODO GitOps)
-
-**Types:**
-- [x] telegram.types.ts - типы для сообщений, callback, options
-- [x] index.ts - экспорт модуля
-- [x] Экспорт из главного index.ts
+### Следующие секции (по плану):
+1. Реализация OrchestratorModule (Intent Classifier + Routing)
+2. Реализация Message Aggregator (Smart Batching)
+3. Реализация bootstrap() function
 
 ---
 
 ## История выполненных секций
+
+### ✅ TelegramModule (Grammy) (завершено)
+
+**Создано:**
+- telegram.module.ts - forRoot/forRootAsync
+- telegram.service.ts - sendMessage, editMessage, progress updates
+- telegram.controller.ts - webhook endpoint
+- telegram-auth.guard.ts - whitelist + admin
+- emergency-command.handler.ts - /status, /reset
+- telegram.types.ts - все типы
 
 ### ✅ DatabaseModule (Drizzle + Neon) (завершено)
 
