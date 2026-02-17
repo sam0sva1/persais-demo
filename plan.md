@@ -9,41 +9,39 @@
 
 ---
 
-## Текущая секция: Настройка npm link + docker-compose + NestJS skeleton
+## Текущая секция: Ожидание действий пользователя
 
-### Цель
-Связать два репозитория через npm link, создать docker-compose для локальной разработки и настроить базовый NestJS skeleton.
+⚠️ **Требуется ручное действие:**
 
-### Зачем
-- npm link позволяет разрабатывать persais-core локально без публикации в npm
-- docker-compose поднимает PostgreSQL для локальной разработки
-- NestJS skeleton - основа для запуска приложения
+```bash
+# Исправить права на npm кэш:
+sudo chown -R $(whoami) ~/.npm
 
-### Задачи
+# Затем установить зависимости в обоих репозиториях:
+cd ~/WORK/code/persais-core && npm install
+cd ~/WORK/code/persais && npm install
+```
 
-**npm link:**
-- [ ] Выполнить `npm link` в persais-core/ ⚠️ требуется `sudo chown -R $(whoami) ~/.npm`
-- [x] Создать package.json в persais/ с зависимостью от persais-core (file:../persais-core)
-- [ ] Выполнить `npm install` после исправления прав npm
-- [ ] Проверить что import работает
+После этого можно проверить запуск: `npm run start:dev`
 
-**docker-compose:**
-- [x] Создать docker-compose.yml в persais/ с PostgreSQL
-- [x] Добавить volume для persistence данных
-- [x] Добавить health check
-
-**NestJS skeleton в persais/:**
-- [x] Создать src/main.ts - точка входа
-- [x] Создать src/app.module.ts - корневой модуль
-- [x] Создать базовый tsconfig.json
-- [x] Создать .env.example
-- [x] Создать .gitignore
-- [x] Создать директории src/agents/, src/tools/, src/schemas/
-- [ ] Проверить что приложение запускается (после npm install)
+### Следующие секции (по плану):
+1. Реализация DatabaseModule (Drizzle + Neon)
+2. Реализация TelegramModule (Grammy)
+3. Реализация OrchestratorModule
 
 ---
 
 ## История выполненных секций
+
+### ✅ NestJS skeleton + docker-compose (завершено)
+
+**Создано в persais/:**
+- package.json (зависимость file:../persais-core)
+- docker-compose.yml (PostgreSQL 16)
+- tsconfig.json
+- src/main.ts, src/app.module.ts
+- .env.example, .gitignore
+- Директории src/agents/, src/tools/, src/schemas/
 
 ### ✅ Создание структуры persais-core/ (завершено)
 
