@@ -9,14 +9,31 @@
 
 ---
 
-## Текущая секция: Ожидание подтверждения
+## Текущая секция: Реализация TelegramModule (Grammy)
 
-DatabaseModule реализован. Ожидается подтверждение пользователя для перехода к следующей секции.
+### Цель
+Создать TelegramModule для обработки webhook запросов от Telegram с Grammy.
 
-### Следующие секции (по плану):
-1. Реализация TelegramModule (Grammy)
-2. Реализация OrchestratorModule (Intent Classifier + Routing)
-3. Реализация Message Aggregator (Smart Batching)
+### Зачем
+- Grammy - современная библиотека для Telegram ботов с хорошей типизацией
+- Webhook более эффективен чем polling для production
+- AuthGuard обеспечивает whitelist доступ
+
+### Задачи
+
+**Core:**
+- [x] telegram.module.ts - NestJS модуль с Bot factory (forRoot/forRootAsync)
+- [x] telegram.service.ts - отправка сообщений, форматирование, progress updates
+- [x] telegram.controller.ts - webhook endpoint с роутингом
+
+**Guards & Handlers:**
+- [x] telegram-auth.guard.ts - whitelist + admin проверка
+- [x] emergency-command.handler.ts - /status, /reset (abort/rollback/deploy - TODO GitOps)
+
+**Types:**
+- [x] telegram.types.ts - типы для сообщений, callback, options
+- [x] index.ts - экспорт модуля
+- [x] Экспорт из главного index.ts
 
 ---
 
