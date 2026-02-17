@@ -9,25 +9,37 @@
 
 ---
 
-## Текущая секция: Ожидание действий пользователя
+## Текущая секция: Реализация DatabaseModule (Drizzle + Neon)
 
-⚠️ **Требуется ручное действие:**
+### Цель
+Создать полноценный DatabaseModule с Drizzle ORM для работы с PostgreSQL (Neon в продакшене, локальный в dev).
 
-```bash
-# Исправить права на npm кэш:
-sudo chown -R $(whoami) ~/.npm
+### Зачем
+- Основа для хранения состояния агентов, сообщений, конфигураций
+- Drizzle - type-safe ORM с отличной поддержкой TypeScript
+- Neon - serverless PostgreSQL с автоматическим масштабированием
 
-# Затем установить зависимости в обоих репозиториях:
-cd ~/WORK/code/persais-core && npm install
-cd ~/WORK/code/persais && npm install
-```
+### Задачи
 
-После этого можно проверить запуск: `npm run start:dev`
+**Схемы (в persais-core/src/core/database/schema/):**
+- [x] conversations.ts - таблица conversations с messages как JSONB
+- [x] agent-states.ts - состояние агентов (LangGraph checkpoints)
+- [x] llm-configs.ts - конфигурации LLM для агентов
+- [x] audit-log.ts - аудит действий
+- [x] agents-registry.ts - реестр агентов
+- [x] tools-registry.ts - реестр инструментов
+- [x] index.ts - экспорт всех схем
 
-### Следующие секции (по плану):
-1. Реализация DatabaseModule (Drizzle + Neon)
-2. Реализация TelegramModule (Grammy)
-3. Реализация OrchestratorModule
+**Сервисы:**
+- [x] database.service.ts - основной сервис с Drizzle client
+- [x] repositories/conversation.repository.ts - работа с conversations
+- [x] repositories/audit.repository.ts - логирование действий
+- [x] repositories/index.ts - экспорт репозиториев
+
+**Модуль:**
+- [x] database.module.ts - NestJS модуль с DI (forRoot/forRootAsync)
+- [x] drizzle.config.ts - конфигурация для миграций
+- [x] Экспорт из index.ts
 
 ---
 
