@@ -16,14 +16,7 @@ async function main() {
     telegram: {
       token: process.env.TELEGRAM_BOT_TOKEN!,
       webhookUrl: process.env.TELEGRAM_WEBHOOK_URL,
-      allowedUserIds: (process.env.TELEGRAM_ALLOWED_USERS || '')
-        .split(',')
-        .filter(Boolean)
-        .map(Number),
-      adminUserIds: (process.env.TELEGRAM_ADMIN_USERS || '')
-        .split(',')
-        .filter(Boolean)
-        .map(Number),
+      registrationSecret: process.env.REGISTRATION_SECRET!,
     },
     database: {
       url: process.env.DATABASE_URL!,

@@ -9,8 +9,10 @@
     "start": "node dist/main.js",
     "start:dev": "ts-node-dev --respawn src/main.ts",
     "typecheck": "tsc --noEmit",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
+    "db:migrate": "ts-node -e \"require('dotenv').config(); require('persais-core/dist/scripts/db-migrate')\"",
+    "db:rollback": "ts-node -e \"require('dotenv').config(); require('persais-core/dist/scripts/db-rollback')\"",
+    "db:status": "ts-node -e \"require('dotenv').config(); require('persais-core/dist/scripts/db-status')\"",
+    "db:reset": "ts-node -e \"require('dotenv').config(); require('persais-core/dist/scripts/db-reset')\"",
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down"
   },

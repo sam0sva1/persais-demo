@@ -9,22 +9,53 @@
 
 ---
 
-## Текущая секция: Ожидание подтверждения
+## Текущая секция: Завершено - Step 3 (Mechanic Logic)
 
-OrchestratorModule реализован. Ожидается подтверждение пользователя.
+Все модули Step 3 реализованы:
+- ✅ GitOpsModule
+- ✅ CoderModule (Aider)
+- ✅ Mechanic Agent + MechanicService
 
-### Следующие секции (по плану):
-1. Message Aggregator (Smart Batching)
-2. bootstrap() function
-3. Интеграция модулей в TelegramController
+### Следующий этап (Step 4):
+1. First Evolution Test - создать Echo агента через чат
 
 ---
 
 ## История выполненных секций
 
-### ✅ OrchestratorModule (завершено)
+### ✅ Step 3: Mechanic Logic (завершено)
 
-**Создано:**
+**GitOpsModule:**
+- gitops.service.ts - полный функционал simple-git
+- Branch management (create, delete, checkout)
+- Commit, push, pull операции
+- Diff и status информация
+- Abort feature helper
+
+**CoderModule (Aider):**
+- coder.service.ts - управление Aider subprocess
+- Retry mechanism с error loop detection
+- System checks (typecheck, test, lint)
+- Changed files parsing
+
+**Mechanic Agent:**
+- mechanic.agent.ts - обработка feature requests
+- mechanic.service.ts - полный workflow:
+  - Feature scaffolding из шаблонов
+  - Code generation с Aider
+  - Git workflow management
+  - System verification
+  - Per-user state management
+
+### ✅ Step 2: Core Logic (завершено)
+
+**Message Aggregator + bootstrap():**
+- aggregator-state.ts - схема для Postgres recovery
+- message-aggregator.service.ts - smart batching с debounce
+- bootstrap.ts - полная реализация с NestFactory
+- Интеграция aggregator в TelegramController
+
+**OrchestratorModule:**
 - openrouter.client.ts - wrapper для OpenRouter API
 - llm-client.factory.ts - создание клиентов с кэшированием
 - intent-classifier.service.ts - classify (keep_current/uncertain/switch)
@@ -32,9 +63,7 @@ OrchestratorModule реализован. Ожидается подтвержде
 - orchestrator.service.ts - роутинг и agent switching
 - orchestrator.module.ts - forRoot/forRootAsync
 
-### ✅ TelegramModule (Grammy) (завершено)
-
-**Создано:**
+**TelegramModule (Grammy):**
 - telegram.module.ts - forRoot/forRootAsync
 - telegram.service.ts - sendMessage, editMessage, progress updates
 - telegram.controller.ts - webhook endpoint
@@ -42,25 +71,14 @@ OrchestratorModule реализован. Ожидается подтвержде
 - emergency-command.handler.ts - /status, /reset
 - telegram.types.ts - все типы
 
-### ✅ DatabaseModule (Drizzle + Neon) (завершено)
+**DatabaseModule (Drizzle + Neon):**
+- Схемы: conversations, agent-states, llm-configs, audit-log, registries, aggregator-state
+- Сервисы: DatabaseService, ConversationRepository, AuditRepository
+- Модуль: forRoot() / forRootAsync()
 
-**Схемы созданы:**
-- conversations.ts - с messages как JSONB
-- agent-states.ts - LangGraph checkpoints
-- llm-configs.ts, audit-log.ts
-- agents-registry.ts, tools-registry.ts
+### ✅ Step 1: Infrastructure (завершено)
 
-**Сервисы:**
-- DatabaseService - connection pool
-- ConversationRepository, AuditRepository
-
-**Модуль:**
-- DatabaseModule.forRoot() / forRootAsync()
-- drizzle.config.ts для миграций
-
-### ✅ NestJS skeleton + docker-compose (завершено)
-
-**Создано в persais/:**
+**persais/:**
 - package.json (зависимость file:../persais-core)
 - docker-compose.yml (PostgreSQL 16)
 - tsconfig.json
@@ -68,11 +86,7 @@ OrchestratorModule реализован. Ожидается подтвержде
 - .env.example, .gitignore
 - Директории src/agents/, src/tools/, src/schemas/
 
-### ✅ Создание структуры persais-core/ (завершено)
-
-**Цель:** Создать базовую структуру директорий и файлов для ядра проекта.
-
-**Создано 31 файл:**
+**persais-core/:**
 - package.json, tsconfig.json, .gitignore
 - src/index.ts, src/bootstrap.ts
 - src/core/ - модули telegram, database, orchestrator, gitops, coder
@@ -80,7 +94,7 @@ OrchestratorModule реализован. Ожидается подтвержде
 - src/shared/ - types/, utils/
 - templates/ - 4 шаблона для Механика
 
-### ✅ Обновление документации (завершено)
-- Заменены все упоминания "demiurge" на "persais"
-- Удалены все ссылки на Redis/Upstash/BullMQ
-- Обновлена архитектура Message Aggregator на In-Memory + Postgres
+### ✅ Step 0: Prerequisites (завершено)
+- Обновлена документация (demiurge → persais)
+- Удалены ссылки на Redis/Upstash/BullMQ
+- Архитектура Message Aggregator на In-Memory + Postgres
