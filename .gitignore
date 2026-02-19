@@ -34,3 +34,4 @@ temp/
 # src/agents/dynamic/
 # src/tools/dynamic/
 # src/schemas/dynamic/
+.aider*
