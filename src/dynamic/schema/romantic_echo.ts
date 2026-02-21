@@ -9,13 +9,11 @@
 import {
   pgTable,
   uuid,
-  varchar,
   text,
-  integer,
-  boolean,
   timestamp,
+  boolean,
   bigint,
-  jsonb,
+  index,
 } from 'drizzle-orm/pg-core';
 
 export const romantic_echo = pgTable('romantic_echo', {
@@ -27,9 +25,13 @@ export const romantic_echo = pgTable('romantic_echo', {
   createdBy: bigint('created_by', { mode: 'number' }),
 
   // === CUSTOM FIELDS ===
-  message: text('message').notNull(),
-  timestamp: timestamp('timestamp').defaultNow(),
-});
+  userId: bigint('user_id', { mode: 'number' }).notNull(),
+  chatId: bigint('chat_id', { mode: 'number' }).notNull(),
+  content: text('content').notNull(),
+}, (table) => [
+  index('user_id_idx').on(table.userId),
+  index('chat_id_idx').on(table.chatId),
+]);
 
 // TypeScript type inference
 export type romantic_message = typeof romantic_echo.$inferSelect;

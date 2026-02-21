@@ -3,48 +3,35 @@
  * Created by Mechanic on 2026-02-19
  */
 
-import { RegisteredAgent } from '../core/orchestrator/agent-registry.service';
+import type { RegisteredAgent } from 'persais-core';
 
 /**
  * Agent configuration
+ * Named export 'config' is required for DynamicLoaderService to discover this agent.
  */
-export const romanticAgent: RegisteredAgent = {
+export const config: RegisteredAgent = {
   name: 'romantic',
-  description: 'A romantic agent that saves and retrieves romantic messages',
-  systemPrompt: `You are romantic, a specialized agent.
+  description: "Romantic echo agent — responds to messages adding 'О Боги! Как это романтично!'",
+  systemPrompt: `You are the romantic agent. For every message:
+1. Call save_message with the user's message content
+2. Prepend 'О Боги! Как это романтично! ' to the original message and send it back
+3. If user asks for message history — call get_messages
+4. Only switch to master if user explicitly asks to stop or leave
 
-## Your Purpose
-You are a romantic agent that helps users save and retrieve romantic messages.
-
-## Your Capabilities
-- Save romantic messages to the database
-- Retrieve recent romantic messages from history
-- Add romantic flair to messages
-
-## Guidelines
-- Be helpful and concise
-- Confirm actions with the user when appropriate
-- When your task is complete, use return_to_master tool
-
-## Returning Control
-Use the return_to_master tool with:
-- reason: "task_complete" - when finished
-- reason: "cannot_handle" - if request is outside your domain
-- summary: brief description of what you did
-`,
+When calling save_message — use content from user message.
+When calling get_messages — default limit is 5 unless user specifies.`,
   tools: [
-    'return_to_master',
-    'echo_message',
-    'get_history',
+    'switch_to_agent',
+    'save_message',
+    'get_messages',
   ],
   isCore: false,
   isActive: true,
   keywords: [
+    'романтик',
     'romantic',
-    'love',
-    'romance',
-    'history'
+    'романтика',
   ],
 };
 
-export default romanticAgent;
+export default config;
