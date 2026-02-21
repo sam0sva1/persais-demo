@@ -35,6 +35,7 @@ async function main() {
         ? env.OPENROUTER_PROVIDER_ORDER.split(',').map((s) => s.trim())
         : undefined,
       allowFallbacks: env.OPENROUTER_ALLOW_FALLBACKS,
+      spawnTimeoutMs: env.AGENT_SPAWN_TIMEOUT,
     },
     deepgram: env.DEEPGRAM_API_KEY
       ? { apiKey: env.DEEPGRAM_API_KEY }
