@@ -49,7 +49,7 @@ When creating a GitHub App for GitOps integration, configure the following **rep
 |---|---|---|
 | `DATABASE_URL` | ✅ | PostgreSQL connection string |
 | `TELEGRAM_BOT_TOKEN` | ✅ | Telegram Bot API token |
-| `TELEGRAM_WEBHOOK_URL` | ✅ | Public URL for webhook |
+| `APP_BASE_URL` | ✅ | Public base URL (e.g. https://app.fly.dev) |
 | `REGISTRATION_SECRET` | ✅ | Secret key for chat registration |
 | `OPENROUTER_API_KEY` | ✅ | OpenRouter LLM API key |
 | `DEEPGRAM_API_KEY` | | Deepgram voice transcription key |
