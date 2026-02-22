@@ -1,12 +1,5 @@
-import { defineConfig } from 'drizzle-kit';
 import { config } from 'dotenv';
+import { createDrizzleConfig } from 'persais-core';
 config();
 
-export default defineConfig({
-  schema: './src/schemas/*.ts',
-  out: './migrations',
-  driver: 'pg',
-  dbCredentials: {
-    connectionString: process.env.DATABASE_URL!,
-  },
-});
+export default createDrizzleConfig();
