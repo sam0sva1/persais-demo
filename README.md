@@ -53,3 +53,5 @@ When creating a GitHub App for GitOps integration, configure the following **rep
 | `REGISTRATION_SECRET` | ✅ | Secret key for chat registration |
 | `OPENROUTER_API_KEY` | ✅ | OpenRouter LLM API key |
 | `DEEPGRAM_API_KEY` | | Deepgram voice transcription key |
+| `WEB_ACCESS_API_KEYS` | | Web search API keys (comma-separated for multi-key rotation) |
+| `WEB_ACCESS_MONTHLY_LIMIT` | | Per-key monthly credit limit (default: 995) |
