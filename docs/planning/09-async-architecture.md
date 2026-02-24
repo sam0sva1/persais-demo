@@ -20,6 +20,14 @@ The agentic loop runs synchronously inside `processMessage()`. The user receives
 
 As an interim solution, a global `send_message` tool was added (available to ALL agents). Agents can call it during the agentic loop to send progress updates. This works within the current synchronous architecture — the tool sends directly to Telegram mid-loop.
 
+### No-Tool Nudge Retry (done)
+
+Safety mechanism in `AgenticLoopService`: if an agent responds with text but makes zero tool calls on its first turn (and tools are available), the loop injects a nudge message and retries once. This catches the common case where the LLM describes an action ("I'm launching Aider") without actually emitting a tool call.
+
+- One retry only (flag `retriedNoTools`), no infinite loops
+- General mechanism — works for all agents, not just Mechanic
+- Agent prompts also reinforced with "Tool Calling Discipline" section: never describe actions in text without calling the tool
+
 ### Persistent Typing + Parallel Tools (done)
 
 Two improvements to reduce perceived latency without changing the synchronous architecture:

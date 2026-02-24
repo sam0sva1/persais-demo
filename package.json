@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/main.js",
-    "start:dev": "ts-node-dev --respawn src/main.ts",
+    "start:dev": "ts-node-dev --respawn --ignore-watch src/agents --ignore-watch src/tools --ignore-watch src/schemas --ignore-watch tests --ignore-watch src/tasks --ignore-watch src/migrations src/main.ts",
     "typecheck": "tsc --noEmit",
     "db:migrate": "ts-node -e \"require('dotenv').config(); require('persais-core/dist/scripts/db-migrate')\"",
     "db:rollback": "ts-node -e \"require('dotenv').config(); require('persais-core/dist/scripts/db-rollback')\"",
