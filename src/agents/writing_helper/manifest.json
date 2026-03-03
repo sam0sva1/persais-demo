@@ -1,0 +1,6 @@
+{
+  "name": "writing_helper",
+  "description": "Creative writing assistant that helps develop characters, plots, and worlds. Stores project notes, searches research material, and maintains continuity across writing sessions.",
+  "keywords": ["write", "story", "персонаж", "сюжет", "character", "plot", "world", "арка", "конфликт"],
+  "tools": ["agent_memory", "agent_knowledge", "web_search"]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "health_tracker",
+  "description": "Extracts and stores health data from free-form text or voice messages. Records daily health observations in structured format for later analysis.",
+  "keywords": ["health", "здоровье", "самочувствие", "симптом", "symptom", "sleep", "сон", "energy"],
+  "tools": ["agent_memory"],
+  "hooks": [
+    {
+      "trigger": "after:agent_memory.save",
+      "action": {
+        "tool": "send_message",
+        "input": { "message": "Health data saved." }
+      },
+      "inject": {
+        "source": "result",
+        "field": "body"
+      }
+    }
+  ]
+}

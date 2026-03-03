@@ -1,0 +1,6 @@
+{
+  "name": "side_quests",
+  "description": "Generates daily side quests — small, fun, real-world micro-adventures to break routine. Can schedule automatic daily delivery via manage_schedule.",
+  "keywords": ["quest", "задание", "квест", "side quest", "challenge", "приключение"],
+  "tools": ["manage_schedule"]
+}

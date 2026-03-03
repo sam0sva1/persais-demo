@@ -1,0 +1,14 @@
+{
+  "name": "bonds_list",
+  "description": "Fetches and displays bond listings from an external service. Can check specific bond availability via API endpoint and extract bond info from web pages.",
+  "keywords": ["bond", "облигация", "bonds", "облигации", "listing", "доходность"],
+  "tools": ["http_request", "web_extract"],
+  "endpoints": [
+    {
+      "name": "check_bond",
+      "url": "https://api.example.com/bonds",
+      "method": "POST",
+      "description": "Check bond availability and details"
+    }
+  ]
+}
