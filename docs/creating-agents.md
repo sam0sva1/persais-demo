@@ -140,6 +140,22 @@ These are always available. Adding them to `tools[]` is unnecessary and will be 
 | `web_extract` | `WEB_ACCESS_API_KEYS` | Extract and summarize content from a URL. |
 | `manage_schedule` | `CRONOS_API_KEY` | Create/manage scheduled jobs (cron, one-time). |
 
+### Choosing between agent_memory and agent_knowledge
+
+Both provide persistent storage, but serve different purposes:
+
+| | `agent_memory` | `agent_knowledge` |
+|---|---|---|
+| **Data model** | Key-value (collection → key → JSON) | Free text with embeddings + tags |
+| **Search** | Exact key lookup, JSONB filter | Semantic search (by meaning) |
+| **Best for** | Structured data: settings, trackers, lists | Unstructured text: notes, ideas, research |
+| **Example** | Habit tracker (collection="habits", key="morning_run") | Notes agent (store text, search by meaning) |
+
+**Rules of thumb:**
+- If the data has a clear key and structure → `agent_memory`
+- If you need to find things by meaning, not exact key → `agent_knowledge`
+- Both can be used together
+
 ### Missing Env Vars
 
 If a tool's required env var is not set, the tool is not registered at startup. Agents that request it still load — the tool is simply skipped with a warning in logs. This allows graceful degradation.
