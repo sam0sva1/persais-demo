@@ -1,6 +1,20 @@
 {
   "name": "notes",
-  "description": "Stores and retrieves user notes with semantic search and tagging. Extracts key meaning from user messages, tags them, and enables search by meaning or tags.",
-  "keywords": ["note", "remember", "записать", "заметка", "запомни", "найди заметку", "save", "find"],
-  "tools": ["agent_knowledge"]
+  "description": "Stores and retrieves user notes with semantic search and tagging. Extracts key meaning from user messages, tags them, and enables search by meaning or tags. Now includes note IDs in all responses.",
+  "keywords": [
+    "note",
+    "remember",
+    "записать",
+    "заметка",
+    "запомни",
+    "найди заметку",
+    "save",
+    "find"
+  ],
+  "tools": [
+    "agent_knowledge"
+  ],
+  "maxIterations": 10,
+  "endpoints": [],
+  "hooks": []
 }
