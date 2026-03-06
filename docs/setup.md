@@ -4,8 +4,8 @@
 
 - **Node.js** 20+
 - **PostgreSQL** with pgvector extension (local via Docker or [Neon](https://neon.tech) for production)
-- **Telegram Bot** — create via [@BotFather](https://t.me/BotFather)
-- **OpenRouter** API key — [openrouter.ai](https://openrouter.ai)
+- **Telegram Bot** — create via [@BotFather](https://t.me/BotFather), copy the bot token
+- **OpenRouter** API key — register at [openrouter.ai](https://openrouter.ai), create a key in [Keys](https://openrouter.ai/keys)
 
 ## Environment Variables
 
@@ -26,29 +26,33 @@ cp .env.example .env
 
 ### Models (all have defaults)
 
+All models are specified as OpenRouter model IDs. Browse available models at [openrouter.ai/models](https://openrouter.ai/models).
+
 | Variable | Default | Description |
 |---|---|---|
-| `DEFAULT_MODEL` | `openrouter/moonshotai/kimi-k2.5` | Primary model for agents |
-| `FALLBACK_MODEL` | `google/gemini-2.0-flash-001` | Fallback when primary fails |
-| `CLASSIFIER_MODEL` | `google/gemini-2.0-flash-001` | Fast model for intent classification |
+| `DEFAULT_MODEL` | `openai/gpt-5-mini` | Primary model for agents |
+| `FALLBACK_MODEL` | `google/gemini-2.5-flash` | Fallback when primary fails |
+| `CLASSIFIER_MODEL` | `google/gemini-2.5-flash-lite` | Fast, cheap model for intent classification |
 | `CODER_MODEL` | *(uses DEFAULT_MODEL)* | Override for Mechanic/Aider |
-| `OPENROUTER_PROVIDER_ORDER` | `Moonshot` | Comma-separated provider priority |
+| `OPENROUTER_PROVIDER_ORDER` | *(empty)* | Comma-separated provider priority (optional, see below) |
 | `OPENROUTER_ALLOW_FALLBACKS` | `true` | Allow routing beyond ordered list |
 | `MODEL_TIMEOUT` | `60000` | Request timeout in ms |
 
+> **`OPENROUTER_PROVIDER_ORDER`** — pin specific providers for a model (e.g. `OpenAI,Together`). Useful when a model is hosted by multiple providers and you want to control latency/reliability. Leave empty to let OpenRouter decide.
+
 ### Optional Services
 
-| Variable | Enables | Description |
-|---|---|---|
-| `APP_BASE_URL` | Webhooks | Public URL (e.g. `https://app.fly.dev`) |
-| `DEEPGRAM_API_KEY` | Voice | Speech-to-text for voice messages |
-| `WEB_ACCESS_API_KEYS` | `web_search`, `web_extract` | Comma-separated API keys (multi-key rotation) |
-| `WEB_ACCESS_MONTHLY_LIMIT` | — | Per-key monthly limit (default: 995) |
-| `CRONOS_API_KEY` | `manage_schedule` | Scheduler service API key |
-| `SCHEDULER_WEBHOOK_SECRET` | — | Required when CRONOS_API_KEY is set |
-| `GIT_REMOTE_URL` | GitOps | GitHub repo URL for Mechanic |
-| `GIT_ACCESS_TOKEN` | GitOps | GitHub access token |
-| `PORT` | — | Server port (default: 3000) |
+| Variable | Enables | Where to get | Description |
+|---|---|---|---|
+| `APP_BASE_URL` | Webhooks | — | Public URL (e.g. `https://app.fly.dev`). For local dev, use [ngrok](https://ngrok.com) |
+| `SPEECH_API_KEY` | Voice | [deepgram.com](https://console.deepgram.com) | Speech processing (STT/TTS). Currently uses Deepgram |
+| `WEB_ACCESS_API_KEYS` | `web_search`, `web_extract` | [tavily.com](https://app.tavily.com) | Comma-separated API keys (multi-key rotation, ~1000 free credits/key/month) |
+| `WEB_ACCESS_MONTHLY_LIMIT` | — | — | Per-key monthly limit (default: 995) |
+| `CRONOS_API_KEY` | `manage_schedule` | [cronos](https://cronos-for-ai-agents.fly.dev) | Scheduler service API key |
+| `SCHEDULER_WEBHOOK_SECRET` | — | — | Required when CRONOS_API_KEY is set (any random string) |
+| `GIT_REMOTE_URL` | GitOps | — | GitHub repo URL for Mechanic |
+| `GIT_ACCESS_TOKEN` | GitOps | [GitHub Settings](https://github.com/settings/tokens) | Personal access token with repo scope |
+| `PORT` | — | — | Server port (default: 3000) |
 
 > If an optional service env var is missing, the corresponding tools are skipped at startup with a warning. Agents that request those tools still load — they just won't have access to them.
 
